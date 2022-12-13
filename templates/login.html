@@ -1,0 +1,46 @@
+{%load static%}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Login</title>
+
+  <!-- Font Awesome Cdn Link -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"/>
+  <link href="{% static '/css/login.css' %}" rel="stylesheet" type="text/css">
+</head>
+<body>
+{% if error_message %}
+ <div class="alert">
+     <span class="closebtn" onclick="this.parentElement.style.display='none';"></span>
+          {{ error_message }}
+ </div>
+{% endif %}
+  <div class="wrapper">
+    <h1>Mayer Doa Enterprise</h1>
+    <p><h4>Welcome</h4></p>
+
+    <form action="." method="POST">
+        {% csrf_token %}
+      <input type="text" name="username" placeholder="Enter username">
+      <input type="password" name="password" placeholder="Password">
+      <p class="recover">
+        <a href="#">Recover Password</a>
+      </p>
+        <button type='submit'>Sign in</button>
+    </form>
+
+
+    <p class="or">
+      Or Login with 
+    </p>
+    <div class="icons">
+      <i class="fab fa-google"></i>
+      <i class="fab fa-facebook"></i>
+    </div>
+    <div class="not-member">
+      Not a Signup? <a href="#">Register Now</a>
+    </div>
+  </div>
+</body>
+</html>

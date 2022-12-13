@@ -1,0 +1,332 @@
+/*  import google fonts */
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap");
+*{
+  margin: 0;
+  padding: 0;
+  outline: none;
+  border: none;
+  text-decoration: none;
+  box-sizing: border-box;
+  font-family: "Poppins", sans-serif;
+     font-size: 16px;
+}
+body{
+  background: rgb(226, 226, 226);
+}
+.logo{
+  text-align: center;
+  display: flex;
+  margin: 10px 0 0 10px;
+  padding-bottom: 3rem;
+}
+
+.logo img{
+  width: 45px;
+  height: 45px;
+  border-radius: 50%;
+}
+.logo span{
+  font-weight: bold;
+  padding-left: 15px;
+  font-size: 18px;
+  text-transform: uppercase;
+}
+a{
+  position: relative;
+  width: 280px;
+  font-size: 14px;
+  color: rgb(85, 83, 83);
+  display: table;
+  padding: 10px;
+}
+nav .fas{
+  position: relative;
+  width: 70px;
+  height: 40px;
+  top: 20px;
+  font-size: 20px;
+  text-align: center;
+}
+.nav-item{
+  position: relative;
+  top: 12px;
+  margin-left: 10px;
+}
+a:hover{
+  background: #eee;
+}
+a:hover i{
+  color: #34AF6D;
+  transition: 0.5s;
+}
+.logout{
+  position: absolute;
+  bottom: 0;
+}
+
+.container{
+  display: flex;
+}
+
+/* MAin Section */
+.main{
+  position: relative;
+  padding: 20px;
+  width: 100%;
+}
+.main-top{
+  display: flex;
+  width: 100%;
+}
+.main-top i{
+  position: absolute;
+  right: 0;
+  margin: 10px 30px;
+  color: rgb(110, 109, 109);
+  cursor: pointer;
+}
+.main .usersEmployee{
+  display: flex;
+  width: 100%;
+}
+.usersEmployee .card{
+    width: 25%;
+  margin: 10px;
+  background: #fff;
+  text-align: center;
+  border-radius: 10px;
+  padding: 10px;
+  box-shadow: 0 20px 35px rgba(0, 0, 0, 0.1);
+}
+.usersEmployee .card img{
+  width: 70px;
+  height: 70px;
+  border-radius: 50%;
+}
+.usersEmployee .card h4{
+  text-transform: capitalize ;
+}
+.usersEmployee .card p{
+  font-size: 12px;
+  margin-bottom: 15px;
+  text-transform: capitalize ;
+}
+.usersEmployee table{
+  margin:  auto;
+}
+.usersEmployee .per span{
+  padding: 5px;
+  border-radius: 5px;
+  background: rgb(223, 223, 223);
+}
+.usersEmployee td{
+  font-size: 14px;
+  padding-right: 15px;
+    padding-left: 15px;
+}
+.usersEmployee .card button{
+  width: 100%;
+  margin-top: 8px;
+  padding: 2px;
+  cursor: pointer;
+  border-radius: 10px;
+  background: transparent;
+  border: 1px solid #4AD489;
+}
+.usersEmployee .card button:hover{
+  background: #4AD489;
+  color: #fff;
+}
+.usersEmployee .card button a{
+   width: 100%;
+    border-radius: 3px;
+}
+.usersEmployee .card button a:hover{
+  background: #4AD489;
+  color: #fff;
+}
+
+/*Attendance List serction  */
+.attendance{
+  margin-top: 20px;
+  text-transform: capitalize;
+}
+.attendance-list{
+  width: 100%;
+  padding: 10px;
+  margin-top: 10px;
+  background: #fff;
+  border-radius: 10px;
+  box-shadow: 0 20px 35px rgba(0, 0, 0, 0.1);
+}
+.table{
+  border-collapse: collapse;
+  margin: 25px 0;
+  font-size: 15px;
+  min-width: 100%;
+  overflow: hidden;
+  border-radius: 5px 5px 0 0;
+}
+table thead tr{
+  color: #fff;
+  background: #34AF6D;
+  text-align: left;
+  font-weight: bold;
+}
+.table th,
+.table td{
+  padding: 14px 16px;
+}
+.table tbody tr{
+  border-bottom: 1px solid #ddd;
+}
+.table tbody tr:nth-of-type(odd){
+  background: #f3f3f3;
+}
+.table tbody tr.active{
+  font-weight: bold;
+  color: #4AD489;
+}
+.table tbody tr:last-of-type{
+  border-bottom: 2px solid #4AD489;
+}
+.table button{
+  padding: 6px 20px;
+  border-radius: 10px;
+  cursor: pointer;
+  background: transparent;
+  border: 1px solid #4AD489;
+}
+.table button:hover{
+  background: #4AD489;
+  color: #fff;
+  transition: 0.5rem;
+}
+
+
+input[type=text] {
+  box-sizing: border-box;
+  border: 2px solid #4AD489;
+  border-radius: 5px;
+}
+
+input[type=button], input[type=submit], input[type=reset] {
+  background-color: #04AA6D;
+  color: white;
+  padding: 12px 32px;
+  text-decoration: none;
+  margin: 4px 2px;
+  cursor: pointer;
+  border-radius: 5px;
+  text-align: center;
+}
+
+.btncon{
+  text-align: right;
+  margin-right: 14%;
+  }
+#btn{
+  font-size: 15px;
+  font-weight: bold;
+  }
+
+
+  .usersEmployee .profile_card{
+    width: 25%;
+    margin-left: 37%;
+    background: #fff;
+    text-align: center;
+    border-radius: 10px;
+    padding: 10px;
+    box-shadow: 0 20px 35px rgba(0, 0, 0, 0.1);
+  }
+
+  .usersEmployee .profile_card img{
+    width: 70px;
+    height: 70px;
+    border-radius: 50%;
+  }
+
+  .usersEmployee .per_profile span{
+    padding: 7px;
+    border-radius: 5px;
+    font-weight: bold;
+    font-size: 16px;
+    background: rgb(207, 241, 207);
+  }
+  .td_design h4{
+    margin: 10px ;
+    font-size: 16px;
+  }
+
+    /* NAVBAR */
+  .topnav {
+    background-color: #04AA6D;
+    overflow: hidden;
+  }
+
+  /* Style the links inside the navigation bar */
+  .topnav a {
+    float: right;
+    color: #f2f2f2;
+    text-align: center;
+    padding: 16px 18px;
+    text-decoration: none;
+    font-size: 18px;
+    width: 15%;
+  }
+
+  /* Change the color of links on hover */
+  .topnav a:hover {
+    background-color: #ddd;
+    color:  #04AA6D;
+  }
+
+  /* Add a color to the active/current link */
+  .topnav a.active {
+    background-color: #04AA6D;
+    color: white;
+  }
+
+
+.wrapper{
+  display: inline-flex;
+  align-items: center;
+  justify-content: space-evenly;
+}
+.wrapper .option{
+  background: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+  cursor: pointer;
+  padding: 0 10px;
+  border: 2px solid lightgrey;
+  transition: all 0.3s ease;
+}
+
+input[type="radio"]{
+  display: none;
+}
+#option-1:checked:checked ~ .option-1,
+#option-2:checked:checked ~ .option-2{
+  border-color: #e71308;
+  background: #f0540c;
+}
+#option-1:checked:checked ~ .option-1 .dot,
+#option-2:checked:checked ~ .option-2 .dot{
+  background: #fff;
+}
+#option-1:checked:checked ~ .option-1 .dot::before,
+#option-2:checked:checked ~ .option-2 .dot::before{
+  opacity: 1;
+  transform: scale(1);
+}
+.wrapper .option span{
+  font-size: 18px;
+  color: #000000;
+}
+#option-1:checked:checked ~ .option-1 span,
+#option-2:checked:checked ~ .option-2 span{
+  color: #fff;
+}

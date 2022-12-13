@@ -1,0 +1,100 @@
+{%load static%}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Attendance Dashboard</title>
+
+  <!-- Font Awesome Cdn Link -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"/>
+  <link href="{% static '/css/attendance_profile.css' %}" rel="stylesheet" type="text/css">
+</head>
+<body>
+  <div class="topnav">
+      <a href="{% url 'accounts:ownerLogOut' %}">Logout</a>
+    <a href="#a">Product</a>
+    <a href="#manpower">Manpower</a>
+    <a href="#home">Home</a>
+
+  </div>
+<div class="container">
+    <section class="main">
+      <div class="main-top">
+        <h1>Attendance</h1>
+        <i class="fas fa-user-cog"></i>
+      </div>
+
+        <div class="usersEmployee">
+            {% for emp_obj in emp_model %}
+                 <div class="card">
+                    <img src="{% static 'images/pro_icon.jpg' %}">
+                    <h4>{{ emp_obj.name }}</h4>
+                    <p>{{ emp_obj.department }}</p>
+                    <div class="per">
+                      <table>
+                        <tr>
+                          <td><span>&nbsp;&nbsp;{{ emp_obj.fixed_salary }}</span></td>
+                        </tr>
+                        <tr>
+                          <td> &nbsp;&nbsp;Salary</td>
+                        </tr>
+                      </table>
+                    </div>
+                    <button><a href="{% url 'manpower:empProfile' pk=emp_obj.pk %}">Profile</a></button>
+                 </div>
+            {% endfor %}
+
+        </div>
+
+
+
+      <section class="attendance">
+      <form action="" method="POST">
+        <div class="attendance-list">
+          <h1>Attendance List</h1>
+          <table class="table">
+            <thead>
+              <tr>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Depart</th>
+                <th>Date</th>
+                <th>Money Taken</th>
+                  <th>&nbsp; Present &nbsp;&nbsp;&nbsp; &nbsp; &nbsp;&nbsp;&nbsp; Absent</th>
+              </tr>
+            </thead>
+            <tbody>
+            {% for emp_obj in emp_model %}
+              <tr>
+                <td>{{ forloop.counter }}</td>
+                <td>{{ emp_obj.name }}</td>
+                <td>{{ emp_obj.department }}</td>
+                <td>{{ today_date }}</td>
+                <td><input type="text" id="name" name="{{ emp_obj.id }}"  maxlength="10" size="10" value=0 ></td>
+                 <td><div class="wrapper" >
+                  <input type="radio" name="{{ emp_obj.id }}" id="radio{{forloop.counter}}" >
+                  <input type="radio" name="{{ emp_obj.id }}" id="radio{{forloop.counter}}">
+                    <label for="radio{{forloop.counter}}" class="option option-1">
+                       <span>Present</span>
+                       </label>
+                    <label for="radio{{forloop.counter}}" class="option option-2">
+                       <span>Absent</span>
+                    </label>
+                 </div></td>
+              </tr>
+            {% endfor %}
+
+            </tbody>
+          </table>
+          <div class="btncon">
+            <input id="btn" type="submit" value="Submit">
+          </div>
+
+        </div>
+      </form>
+      </section>
+    </section>
+  </div>
+
+</body>
+</html>
