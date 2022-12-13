@@ -1,0 +1,1 @@
+web: gunicorn MayerDoaEnterprise.wsgi --log-file -
