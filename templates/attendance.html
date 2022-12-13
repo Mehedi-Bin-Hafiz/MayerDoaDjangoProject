@@ -12,12 +12,13 @@
 <body>
   <div class="topnav">
       <a href="{% url 'accounts:ownerLogOut' %}">Logout</a>
-    <a href="#a">Product</a>
-    <a href="#manpower">Manpower</a>
-    <a href="#home">Home</a>
+    <a href="">Product</a>
+    <a href="{% url 'manpower:empAttendance' %}">Manpower</a>
+    <a href="">Home</a>
 
   </div>
 <div class="container">
+
     <section class="main">
       <div class="main-top">
         <h1>Attendance</h1>
@@ -49,7 +50,18 @@
 
 
       <section class="attendance">
-      <form action="" method="POST">
+
+           {% if messages %}
+                <div class="alert">
+              {% for message in messages %}
+                  <p{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</p>
+              {% endfor %}
+               </div>
+          {% endif %}
+
+
+      <form action="{% url 'manpower:confirmAttend'%}" method="POST">
+        {% csrf_token %}
         <div class="attendance-list">
           <h1>Attendance List</h1>
           <table class="table">
@@ -60,7 +72,8 @@
                 <th>Depart</th>
                 <th>Date</th>
                 <th>Money Taken</th>
-                  <th>&nbsp; Present &nbsp;&nbsp;&nbsp; &nbsp; &nbsp;&nbsp;&nbsp; Absent</th>
+                  <th>&nbsp;Present </th>
+                  <th> Absent</th>
               </tr>
             </thead>
             <tbody>
@@ -70,17 +83,19 @@
                 <td>{{ emp_obj.name }}</td>
                 <td>{{ emp_obj.department }}</td>
                 <td>{{ today_date }}</td>
-                <td><input type="text" id="name" name="{{ emp_obj.id }}"  maxlength="10" size="10" value=0 ></td>
-                 <td><div class="wrapper" >
-                  <input type="radio" name="{{ emp_obj.id }}" id="radio{{forloop.counter}}" >
-                  <input type="radio" name="{{ emp_obj.id }}" id="radio{{forloop.counter}}">
-                    <label for="radio{{forloop.counter}}" class="option option-1">
-                       <span>Present</span>
-                       </label>
-                    <label for="radio{{forloop.counter}}" class="option option-2">
-                       <span>Absent</span>
-                    </label>
-                 </div></td>
+                <td><input type="text" id="name" name="moneyTaken[]"  maxlength="10" size="10" value=0 ></td>
+                 <td>
+                     <label class="checkcontainer">Present
+                     <input type="checkbox"  name="present[]" value="{{ emp_obj.id }}">
+                         <span class="presentcheckmark"></span>
+                     </label>
+                 </td>
+                 <td>
+                     <label class="checkcontainer">Absent
+                     <input type="checkbox" name="absent[]" value="{{ emp_obj.id }}">
+                         <span class="checkmark"></span>
+                     </label>
+                 </td>
               </tr>
             {% endfor %}
 
@@ -89,8 +104,8 @@
           <div class="btncon">
             <input id="btn" type="submit" value="Submit">
           </div>
-
         </div>
+
       </form>
       </section>
     </section>

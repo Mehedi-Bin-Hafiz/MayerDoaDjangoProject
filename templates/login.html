@@ -10,15 +10,16 @@
   <link href="{% static '/css/login.css' %}" rel="stylesheet" type="text/css">
 </head>
 <body>
-{% if error_message %}
- <div class="alert">
-     <span class="closebtn" onclick="this.parentElement.style.display='none';"></span>
-          {{ error_message }}
- </div>
-{% endif %}
   <div class="wrapper">
+
     <h1>Mayer Doa Enterprise</h1>
     <p><h4>Welcome</h4></p>
+      {% if error_message %}
+          <div class="alert">
+              <span class="closebtn" onclick="this.parentElement.style.display='none';"></span>
+              {{ error_message }}
+          </div>
+      {% endif %}
 
     <form action="." method="POST">
         {% csrf_token %}

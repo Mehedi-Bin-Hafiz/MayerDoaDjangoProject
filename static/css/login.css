@@ -96,10 +96,10 @@ a:hover{
 
 /* The alert message box */
 .alert {
-  padding: 20px;
+  padding: 10px;
   background-color: #f44336; /* Red */
   color: white;
-  margin-bottom: 15px;
+  margin-bottom: 5px;
      text-align: center;
     font-size: 20px;
 }

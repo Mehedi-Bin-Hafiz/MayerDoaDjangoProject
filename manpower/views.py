@@ -1,8 +1,9 @@
-from django.shortcuts import render, HttpResponse
+from django.shortcuts import render, HttpResponseRedirect, reverse
 from .models import Employee,Attendance,Salary
 from datetime import datetime
 import pytz
 from django.db.models import Sum, Count
+from django.contrib import messages
 
 
 time_zones = pytz.all_timezones
@@ -65,3 +66,22 @@ def emp_profile(request,pk=None):
             "fixed_salary": fixed_salary
             }
     return render(request, 'employee_profile.html', context=data)
+
+
+def confirm_attendance(request,):
+
+    present_id = request.POST.getlist('present[]')
+    absent_id = request.POST.getlist('absent[]')
+    money_Taken = request.POST.getlist('moneyTaken[]')
+    emp_id = present_id + absent_id
+    for id in present_id:
+        attend_model = Attendance(date=today_date,employee_id=int(id),present_status="present")
+        attend_model.save()
+    for id in absent_id:
+        absent_model = Attendance(date=today_date,employee_id=int(id),present_status="absent")
+        absent_model.save()
+    for id, money in zip(emp_id,money_Taken):
+        salary_model = Salary(date=today_date,employee_id=int(id),money_taken=float(money))
+        salary_model.save()
+    messages.info(request, 'Attendance is taken')
+    return HttpResponseRedirect(reverse('empProfile:empAttendance'))
