@@ -19,6 +19,8 @@ urlpatterns = [
     path('admin/', admin.site.urls, name= 'admin'),
     path('',include('accounts.urls',namespace = "ownerLogin")),
     path('attendance/',include('manpower.urls', namespace='empAttendance')),
-    path('emp_profile/',include('manpower.urls',namespace = "empProfile"))
+    path('emp_profile/',include('manpower.urls', namespace = "empProfile")),
+    path('company_groups/',include('products.urls', namespace = "companyGroups")),
+    path('products_info_input/',include('products.urls', namespace = "productInfoInput"))
 ]
 

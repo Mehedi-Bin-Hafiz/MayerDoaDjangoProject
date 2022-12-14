@@ -1,0 +1,35 @@
+{%load static%}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Home</title>
+
+  <!-- Font Awesome Cdn Link -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"/>
+  <link href="{% static '/css/groups.css' %}" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+    <div class="topnav">
+    <a href="">  </a>
+    <a href="">  </a>
+    <a href="">  </a>
+    </div>
+    <div class="parent">
+        {% for group in product_groups %}
+        <div class="child">
+        <form action="{% url 'products:productInfoInput' pk=group.id %}">
+            {% csrf_token %}
+            <button type="submit" class="button-89" role="button">{{ group.name }}</button>
+        </form>
+        </div>
+        {% endfor %}
+
+    </div>
+
+
+</body>
+</html>
+
+    
