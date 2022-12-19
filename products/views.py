@@ -24,7 +24,7 @@ def product_daily_input(request,pk = None):
     total_products = 0
     if pk:
         product_groups = ProductGroup.objects.filter(id=pk)
-        total_products = Products.objects.filter(product_group=pk).order_by('-id').values('name').annotate(count=Count('name'))
+        total_products = Products.objects.filter(product_group=pk).order_by('-id').annotate(count=Count('name'))
     data = {"emp_model": product_groups,
             "attend_model": product_groups,
             "salary_model": product_groups,
@@ -34,7 +34,7 @@ def product_daily_input(request,pk = None):
             "salary_remain": 0,
             "total_money_taken": 0,
             "two_model": 0,
-            "total_products": total_products
+            "total_products": len(total_products)
             }
     return render(request, 'groups_product_input.html', context=data)
 
