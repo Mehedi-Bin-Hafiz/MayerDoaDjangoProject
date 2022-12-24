@@ -16,8 +16,8 @@ first_day = str(first_day).split(' ')[0]
 
 
 def emp_attendance(request):
-    emp_model = Employee.objects.all()
-    attend_model = Attendance.objects.all()
+    emp_model = Employee.objects.all().order_by("-id")
+    attend_model = Attendance.objects.all().order_by("-id")
     return render(request,'attendance.html',{"emp_model":emp_model,"today_date":today_date, "attend_model":attend_model})
 
 def emp_profile(request,pk=None):
@@ -28,11 +28,11 @@ def emp_profile(request,pk=None):
     fixed_salary = 0
 
     if pk:
-        emp_model = Employee.objects.filter(pk=pk).order_by('-id')
+        emp_model = Employee.objects.filter(id=pk).order_by('-id')
         attend_model = Attendance.objects.filter(employee_id=pk).filter(date__range=[first_day,today_date]).order_by('-date').only('date','present_status').reverse()
         salary_model = Salary.objects.filter(employee_id=pk).filter(date__range=[first_day,today_date]).order_by('-date').only('money_taken').reverse()
         money_taken = Salary.objects.filter(employee_id=pk).filter(date__range=[first_day,today_date]).order_by('-date').aggregate(Sum('money_taken'))
-        fixed_salary = Employee.objects.filter(pk=pk).values('fixed_salary')[0]['fixed_salary']
+        fixed_salary = Employee.objects.filter(id=pk).values('fixed_salary')[0]['fixed_salary']
         two_model = zip(attend_model, salary_model)
 
         if money_taken['money_taken__sum'] is None:
@@ -68,12 +68,13 @@ def emp_profile(request,pk=None):
     return render(request, 'employee_profile.html', context=data)
 
 
-def confirm_attendance(request,):
+def confirm_attendance(request):
 
     present_id = request.POST.getlist('present[]')
     absent_id = request.POST.getlist('absent[]')
     money_Taken = request.POST.getlist('moneyTaken[]')
     emp_id = present_id + absent_id
+    emp_id = sorted(emp_id, reverse=True)
     for id in present_id:
         attend_model = Attendance(date=today_date,employee_id=int(id),present_status="present")
         attend_model.save()
@@ -81,7 +82,11 @@ def confirm_attendance(request,):
         absent_model = Attendance(date=today_date,employee_id=int(id),present_status="absent")
         absent_model.save()
     for id, money in zip(emp_id,money_Taken):
-        salary_model = Salary(date=today_date,employee_id=int(id),money_taken=float(money))
+        try:
+            money = float(money.strip())
+        except:
+            money = 0.0
+        salary_model = Salary(date=today_date,employee_id=int(id),money_taken=money)
         salary_model.save()
     messages.info(request, 'Attendance is taken')
     return HttpResponseRedirect(reverse('empProfile:empAttendance'))

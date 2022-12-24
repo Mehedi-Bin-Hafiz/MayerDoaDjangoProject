@@ -12,7 +12,7 @@
 <body>
   <div class="topnav">
        <a href="{% url 'accounts:ownerLogOut' %}">Logout</a>
-    <a href="">Product</a>
+    <a href="{% url 'products:companyGroups' %}">Products</a>
     <a href="{% url 'manpower:empAttendance' %}">Manpower</a>
     <a href="">Home</a>
 
@@ -24,27 +24,43 @@
         <i class="fas fa-user-cog"></i>
       </div>
       <div class="usersEmployee">
-         {% for emp_obj in emp_model %}
+         {% for group in product_groups %}
         <div class="profile_card">
           <img src="{% static 'images/product logo.png' %}">
-            <h4>Group Name</h4><br>
-          <h4>{{ emp_obj.name|title }}</h4><br>
+             <p>{{ today_date }}</p>
+          <h2 style="font-size: 25px; padding: 5px">{{ group.name|title }}</h2>
           <div class="per_profile">
             <table>
               <tr>
-                  <td><span>{{ total_products }}</span></td>
+                  <td><span> Total Products: &nbsp; {{ total_products }}</span></td>
               </tr>
               <tr class="td_design">
-                  <td><h4>Total Products</h4></td>
+                  <td><h4>Show by date</h4></td>
               </tr>
             </table>
+              <form action="{% url 'products:dailyInputView' pk=group.id %}" method="POST">
+                  {% csrf_token %}
+              <div class="dateinput"><input type="date" name="SearchDate" id="dateofbirth" value="{{feedback.dateSubmitted|date:'d/m/Y'}}"></div>
+                  <div class="show_by_date">
+                   <input id="btn" type="submit" value="Submit">
+                  </div>
+              </form>
 
           </div>
         </div>
-          {% endfor %}
-      </div>
 
+      </div>
+      <form action="{% url 'products:dailyInputConf' pk=group.id %}" method="POST">
+        {% csrf_token %}
       <section class="attendance">
+           {% if messages %}
+                <div class="alert">
+              {% for message in messages %}
+                  <p{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</p>
+              {% endfor %}
+               </div>
+          {% endif %}
+
         <div class="attendance-list">
           <h1></h1>
           <table class="table">
@@ -56,36 +72,38 @@
                 <th>Product Return</th>
                 <th>Price</th>
               </tr>
-{#            </thead>#}
-{#              {% for  attend_obj, salary_obj in  two_model %}#}
-{#            <tbody>#}
-{#              <tr>#}
-{#                <td>{{ forloop.counter }}</td>#}
-{#                <td>{{ attend_obj.date }}</td>#}
-{#                <td>{{ salary_obj.money_taken }}</td>#}
-{#                  {% if attend_obj.present_status == "present" %}#}
-{#                      <td>Present</td>#}
-{#                      <td> </td>#}
-{#                  {% else %}#}
-{#                      <td> </td>#}
-{#                      <td>Absent</td>#}
-{#                  {% endif %}#}
-{#              </tr>#}
-{#                {% endfor %}#}
-{#            </tbody>#}
-{#            <tr>#}
-{#              <td><h4>Total</h4></td>#}
-{#              <td><h4></h4></td>#}
-{#              <td><h4>{{ total_money_taken }}</h4></td>#}
-{#              <td><h4>{{ total_present }}</h4></td>#}
-{#              <td><h4>{{ total_absent }}</h4></td>#}
+            </thead>
 
-            </tr>
+            <tbody>
+            {% for  product_name in  product_names %}
+                <tr>
+                  <td>{{ forloop.counter }}</td>
+                  <td>{{ product_name.name|title }}</td>
+                  <td><input type="text" id="{{product_name.id}}" name="productOut[]"  maxlength="100" size="10" ></td>
+                  <td><input type="text" id="{{product_name.id}}" name="productReturn[]"  maxlength="100" size="10" ></td>
+                  <td><input type="text" id="{{product_name.id}}" name="Price[]"  maxlength="100" size="10" value=0 ></td>
+                </tr>
+            {% endfor %}
+             <tr>
+                  <td>Damage Amount</td>
+                  <td> --------></td>
+                  <td> --------></td>
+                  <td> --------></td>
+                  <td><input type="text" id="damage" name="DamagePrice"  maxlength="100" size="10" value=0 ></td>
+                </tr>
+            </tbody>
+
           </table>
 
         </div>
       </section>
+          <div class="btncon">
+            <input id="btn" type="submit" value="Submit">
+          </div>
+      </form>
+      {% endfor %}
     </section>
+
   </div>
 
 </body>

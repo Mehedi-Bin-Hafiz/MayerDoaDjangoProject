@@ -8,7 +8,7 @@ class ProductGroup(models.Model):
         return self.name
 
 class Products(models.Model):
-    product_group = models.ForeignKey(ProductGroup, on_delete=models.CASCADE)
+    product_group = models.ForeignKey(ProductGroup, on_delete=models.CASCADE, blank=True, null=True, max_length=80)
     date = models.DateField(blank=True, null=True)
     name = models.CharField(blank=True, null=True, max_length=80)
     price = models.FloatField(blank=True, null=True, max_length=80)
@@ -16,7 +16,9 @@ class Products(models.Model):
         return self.name
 
 class ProductStatus(models.Model):
-    product = models.ForeignKey(Products, on_delete=models.CASCADE)
+    product = models.ForeignKey(Products, on_delete=models.CASCADE, blank=True, null=True, max_length=80)
+    product_group = models.ForeignKey(ProductGroup, on_delete=models.CASCADE, blank=True, null=True, max_length=80)
+    date = models.DateField(blank=True, null=True)
     product_out = models.CharField(blank=True, null=True, max_length=80)
     product_return = models.CharField(blank=True, null=True, max_length=80)
     final_price = models.FloatField(blank=True, null=True, max_length=80)
@@ -24,9 +26,8 @@ class ProductStatus(models.Model):
         return str(self.product)
 
 class DamageProduct(models.Model):
-    product_group = models.ForeignKey(ProductGroup, on_delete=models.CASCADE)
+    product_group = models.ForeignKey(ProductGroup, on_delete=models.CASCADE, blank=True, null=True, max_length=80)
     date = models.DateField(blank=True, null=True)
-    name = models.CharField(blank=True, null=True, max_length=80)
     price = models.FloatField(blank=True, null=True, max_length=80)
     def __str__(self):
-        return self.name
+        return self.product_group.name

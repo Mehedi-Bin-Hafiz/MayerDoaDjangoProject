@@ -16,6 +16,7 @@
     <a href="">  </a>
     <a href="">  </a>
     </div>
+    <h1 style="text-align: center">Groups</h1>
     <div class="parent">
         {% for group in product_groups %}
         <div class="child">
@@ -26,6 +27,22 @@
         </div>
         {% endfor %}
 
+    </div>
+    <hr style="height:2px;border-width:0;color:gray;background-color:gray">
+    <h1 style="text-align: center">Accounts</h1>
+    <div class="parent">
+        <div class="child">
+        <form action="{% url 'products:todayView' %}">
+            {% csrf_token %}
+            <button type="submit" class="button-89" role="button">Today's Report</button>
+        </form>
+        </div>
+        <div class="child">
+        <form action="{% url 'products:monthlyView' %}">
+            {% csrf_token %}
+            <button type="submit" class="button-89" role="button">Monthly Report</button>
+        </form>
+        </div>
     </div>
 
 

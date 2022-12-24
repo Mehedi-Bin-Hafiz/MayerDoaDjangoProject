@@ -1,0 +1,91 @@
+{%load static%}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Profile</title>
+
+  <!-- Font Awesome Cdn Link -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"/>
+  <link href="{% static '/css/attendance_profile.css' %}" rel="stylesheet" type="text/css">
+</head>
+<body>
+  <div class="topnav">
+       <a href="{% url 'accounts:ownerLogOut' %}">Logout</a>
+    <a href="{% url 'products:companyGroups' %}">Products</a>
+    <a href="{% url 'manpower:empAttendance' %}">Manpower</a>
+    <a href="">Home</a>
+
+  </div>
+          {% if messages %}
+                <div class="alert">
+              {% for message in messages %}
+                  <p{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message | title }}</p>
+              {% endfor %}
+               </div>
+          {% endif %}
+  <div class="container">
+    <section class="main">
+      <div class="main-top">
+        <i class="fas fa-user-cog"></i>
+      </div>
+          <div class="usersEmployee">
+        <div class="profile_card">
+          <img src="{% static 'images/product logo.png' %}">
+             <p>{{ today_date }}</p>
+          <h2 style="font-size: 25px; padding: 5px">{{ group_name|title }}</h2>
+        </div>
+
+      </div>
+      <section class="attendance">
+        <div class="attendance-list">
+          <h1></h1>
+          <table class="table">
+            <thead>
+              <tr>
+                <th>Number</th>
+                <th>Item</th>
+                <th>Product Out</th>
+                <th>Product Return</th>
+                <th>Price</th>
+              </tr>
+            </thead>
+
+            <tbody>
+            {% for  product_obj, status_obj in  product_and_status %}
+                <tr>
+                  <td>{{ forloop.counter }}</td>
+                  <td>{{ product_obj.name|title }}</td>
+                  <td>{{ status_obj.product_out }}</td>
+                  <td>{{ status_obj.product_return }}</td>
+                  <td>{{ status_obj.final_price }}</td>
+                </tr>
+            {% endfor %}
+
+             <tr>
+                  <td>Damage Amount</td>
+                  <td> --------></td>
+                  <td> --------></td>
+                  <td> --------></td>
+                  <td>-{{ damage_price }}</td>
+                </tr>
+
+             <tr style="font-size: 20px; font-weight: bold">
+                  <td>Total Money</td>
+                  <td> </td>
+                  <td> </td>
+                  <td> </td>
+                  <td>{{subtotal}}</td>
+                </tr>
+            </tbody>
+
+          </table>
+
+        </div>
+      </section>
+    </section>
+
+  </div>
+
+</body>
+</html>

@@ -1,0 +1,41 @@
+{%load static%}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Home</title>
+
+  <!-- Font Awesome Cdn Link -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"/>
+  <link href="{% static '/css/groups.css' %}" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+    <div class="topnav">
+    <a href="">  </a>
+    <a href="">  </a>
+    <a href="">  </a>
+    </div>
+    <br>
+    <br>
+    <br>
+    <div class="parent">
+        <div>
+            <h1 style="font-size: 40px">Date &nbsp; {{ today_date }}</h1>
+        </div>
+
+    </div>
+    <div class="parent">
+        <div>
+            <h1>Total Sell: &nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;  {{ product_price }}</h1>
+            <h1>Damage Price: &nbsp;&nbsp;  &nbsp;{{ damage_price }}</h1>
+            <h1 style="margin-top: 20px ; color: red">Subtotal: &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; {{ subtotal }}</h1>
+        </div>
+
+    </div>
+
+
+</body>
+</html>
+
+    
