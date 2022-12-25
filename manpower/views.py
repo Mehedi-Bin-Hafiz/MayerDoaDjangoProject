@@ -4,6 +4,7 @@ from datetime import datetime
 import pytz
 from django.db.models import Sum, Count
 from django.contrib import messages
+from django.contrib.auth.decorators import login_required
 
 
 time_zones = pytz.all_timezones
@@ -14,12 +15,12 @@ first_day = country_time.replace(day=1)
 first_day = str(first_day).split(' ')[0]
 
 
-
+@login_required
 def emp_attendance(request):
     emp_model = Employee.objects.all().order_by("-id")
     attend_model = Attendance.objects.all().order_by("-id")
     return render(request,'attendance.html',{"emp_model":emp_model,"today_date":today_date, "attend_model":attend_model})
-
+@login_required
 def emp_profile(request,pk=None):
     total_present = 0
     total_absent = 0
@@ -67,7 +68,7 @@ def emp_profile(request,pk=None):
             }
     return render(request, 'employee_profile.html', context=data)
 
-
+@login_required
 def confirm_attendance(request):
 
     present_id = request.POST.getlist('present[]')

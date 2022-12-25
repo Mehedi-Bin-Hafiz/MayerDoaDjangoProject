@@ -5,6 +5,7 @@ from datetime import datetime
 import pytz
 from django.db.models import Sum, Count
 from django.contrib import messages
+from django.contrib.auth.decorators import login_required
 
 time_zones = pytz.all_timezones
 country_time_zone = pytz.timezone('Asia/Dhaka')
@@ -15,21 +16,20 @@ first_day = str(first_day).split(' ')[0]
 
 
 def home(request):
-
     return render(request, 'options.html')
-
+@login_required
 def company_groups(request):
     product_groups = ProductGroup.objects.all()
     return render(request,'groups.html',{"product_groups":product_groups})
-
+@login_required
 def morning_evening_choice(request):
     product_groups = ProductGroup.objects.all()
     return render(request,'morning_eve_input.html',{"product_groups":product_groups})
-
+@login_required
 def company_morning_groups(request):
     product_groups = ProductGroup.objects.all()
     return render(request,'morning_group.html',{"product_groups":product_groups})
-
+@login_required
 def product_daily_input(request,pk = None):
     total_products = 0
     product_groups = None
@@ -46,7 +46,7 @@ def product_daily_input(request,pk = None):
             "total_products": len(total_products),
             }
     return render(request, 'groups_product_input.html', context=data)
-
+@login_required
 def daily_input_confirm(request, pk = None):
     products = Products.objects.filter(product_group_id = pk).values_list('id',flat=True).order_by('-id')
     productReturn = request.POST.getlist('productReturn[]')
@@ -61,7 +61,7 @@ def daily_input_confirm(request, pk = None):
     damage_model.save()
     messages.info(request, 'Selling Information Submitted')
     return redirect('products:productInfoInput', pk = pk)
-
+@login_required
 def product_morning_input(request, pk = None):
     total_products = 0
     product_groups = None
@@ -76,7 +76,7 @@ def product_morning_input(request, pk = None):
             "total_products": len(total_products)
             }
     return render(request, 'group_product_morning_input.html', context=data)
-
+@login_required
 def morning_input_confirm(request, pk = None):
     products = Products.objects.filter(product_group_id = pk).values_list('id',flat=True).order_by('-id')
     productOut = request.POST.getlist('productOut[]')
@@ -85,7 +85,7 @@ def morning_input_confirm(request, pk = None):
         product_model.save()
     messages.info(request, 'First Input Done')
     return redirect('products:productMorningInput', pk = pk)
-
+@login_required
 def daily_input_view(request ):
     search_date = request.POST.get('SearchDate')
     pk = request.POST.get('groupSelector')
@@ -112,7 +112,7 @@ def daily_input_view(request ):
     }
     return render(request, 'daily_view.html', context=data)
 
-
+@login_required
 def today_sell(request):
     try:
         product_price = ProductStatus.objects.filter(date = today_date,).aggregate(Sum('final_price'))
@@ -132,7 +132,7 @@ def today_sell(request):
     }
     return render(request, 'today_sell.html', context=data)
 
-
+@login_required
 def monthly_sell(request):
     try:
         product_price = ProductStatus.objects.filter(date__range=[first_day,today_date]).aggregate(Sum('final_price'))
@@ -154,7 +154,7 @@ def monthly_sell(request):
     return render(request, 'monthly_sell.html', context=data)
 
 
-
+@login_required
 def accounts_section(request):
     product_groups = ProductGroup.objects.all()
     return render(request, 'accounts_section.html', {"product_groups": product_groups})
