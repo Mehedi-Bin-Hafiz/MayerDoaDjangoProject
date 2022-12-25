@@ -11,14 +11,24 @@
 </head>
 
 <body>
-    <div class="topnav">
-    <a href="">  </a>
-    <a href="">  </a>
-    <a href="">  </a>
-    </div>
+ <div class="topnav">
+       <a href="{% url 'accounts:ownerLogOut' %}">Logout</a>
+    <a href="{% url 'products:accountsSection' %}">Accounts</a>
+    <a href="{% url 'products:morningEvening' %}">Product</a>
+    <a href="{% url 'manpower:empAttendance' %}">Manpower</a>
+       <a href="{% url 'products:home' %}">Home</a>
+
+  </div>
     <br>
     <br>
     <br>
+{% if messages %}
+                <div class="alert">
+              {% for message in messages %}
+                  <p{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message | title }}</p>
+              {% endfor %}
+               </div>
+   {% endif %}
     <div class="parent">
         <div>
             <h1 style="font-size: 40px">Date &nbsp; {{ today_date }}</h1>

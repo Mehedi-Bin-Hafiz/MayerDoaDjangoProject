@@ -11,13 +11,17 @@
 </head>
 
 <body>
-    <div class="topnav">
-    <a href="">  </a>
-    <a href="">  </a>
-    <a href="">  </a>
-    </div>
+ <div class="topnav">
+       <a href="{% url 'accounts:ownerLogOut' %}">Logout</a>
+    <a href="{% url 'products:accountsSection' %}">Accounts</a>
+    <a href="{% url 'products:morningEvening' %}">Product</a>
+    <a href="{% url 'manpower:empAttendance' %}">Manpower</a>
+       <a href="{% url 'products:home' %}">Home</a>
+
+  </div>
+
     <div class="container">
-        <form action="{% url 'products:companyGroups' %}">
+        <form action="{% url 'products:morningEvening' %}">
             {% csrf_token %}
             <button type="submit" class="button-89" role="button">Product</button>
         </form>
@@ -26,6 +30,12 @@
     <form action="{% url 'manpower:empAttendance' %}">
         {% csrf_token %}
             <button type="submit" class="button-89" role="button">Manpower</button>
+    </form>
+    </div>
+    <div class="container">
+    <form action="{% url 'products:accountsSection' %}">
+        {% csrf_token %}
+            <button type="submit" class="button-89" role="button">Accounts</button>
     </form>
     </div>
 

@@ -19,11 +19,11 @@
        <a href="{% url 'products:home' %}">Home</a>
 
   </div>
-    <h1 style="text-align: center">Groups: Second Input</h1>
+    <h1 style="text-align: center">Groups: First Input</h1>
     <div class="parent">
         {% for group in product_groups %}
         <div class="child">
-        <form action="{% url 'products:productInfoInput' pk=group.id %}">
+        <form action="{% url 'products:productMorningInput' pk=group.id %}">
             {% csrf_token %}
             <button type="submit" class="button-89" role="button">{{ group.name|title }}</button>
         </form>
@@ -31,10 +31,5 @@
         {% endfor %}
 
     </div>
-
-
-
 </body>
 </html>
-
-    

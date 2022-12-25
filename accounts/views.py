@@ -14,7 +14,7 @@ def owner_login(request):
             if user.is_superuser:
                 return redirect('admin:index')
             login(request, user)
-            return render(request, 'options.html')
+            return redirect('products:home')
         else:
             return render(request, 'login.html', {'error_message': 'Incorrect username or password.'})
     else:

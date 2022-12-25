@@ -15,6 +15,7 @@ class Products(models.Model):
     def __str__(self):
         return self.name
 
+
 class ProductStatus(models.Model):
     product = models.ForeignKey(Products, on_delete=models.CASCADE, blank=True, null=True, max_length=80)
     product_group = models.ForeignKey(ProductGroup, on_delete=models.CASCADE, blank=True, null=True, max_length=80)

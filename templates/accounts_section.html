@@ -1,0 +1,70 @@
+{%load static%}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Home</title>
+
+  <!-- Font Awesome Cdn Link -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"/>
+  <link href="{% static '/css/groups.css' %}" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+ <div class="topnav">
+       <a href="{% url 'accounts:ownerLogOut' %}">Logout</a>
+    <a href="{% url 'products:accountsSection' %}">Accounts</a>
+    <a href="{% url 'products:morningEvening' %}">Product</a>
+    <a href="{% url 'manpower:empAttendance' %}">Manpower</a>
+       <a href="{% url 'products:home' %}">Home</a>
+
+  </div>
+
+    <h1 style="text-align: center">Accounts</h1>
+    <div class="parent">
+        <div class="child">
+        <form action="{% url 'products:todayView' %}">
+            {% csrf_token %}
+            <button type="submit" class="button-89" role="button">Today's Report</button>
+        </form>
+        </div>
+        <div class="child">
+        <form action="{% url 'products:monthlyView' %}">
+            {% csrf_token %}
+            <button type="submit" class="button-89" role="button">Monthly Report</button>
+        </form>
+        </div>
+    </div>
+            <div class="usersEmployee">
+        <div class="profile_card">
+          <img src="{% static 'images/product logo.png' %}">
+        <form action="{% url 'products:dailyInputView' %}" method="POST">
+          <div class="per_profile">
+          <label style="font-weight: bold">Choose Group:</label>
+          <select style="border-radius: 5px; width: 50%; padding: 2%; border: 2px solid green" name="groupSelector">
+              <option value=""> </option>
+              {% for group in product_groups %}
+              <option value="{{ group.id }}" >{{ group.name }}</option>
+              {% endfor %}
+          </select>
+            <table>
+              <tr class="td_design">
+                  <td><h4>Show by date</h4></td>
+              </tr>
+            </table>
+                  {% csrf_token %}
+              <div class="dateinput"><input type="date" name="SearchDate" id="dateofbirth" value="{{feedback.dateSubmitted|date:'Y/m/d'}}"></div>
+                  <div class="show_by_date">
+                   <input id="btn" type="submit" value="Submit">
+                  </div>
+
+
+          </div>
+        </form>
+        </div>
+
+
+      </div>
+
+</body>
+</html>

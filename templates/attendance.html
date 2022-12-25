@@ -10,11 +10,12 @@
   <link href="{% static '/css/attendance_profile.css' %}" rel="stylesheet" type="text/css">
 </head>
 <body>
-  <div class="topnav">
-      <a href="{% url 'accounts:ownerLogOut' %}">Logout</a>
-    <a href="{% url 'products:companyGroups' %}">Products</a>
+ <div class="topnav">
+       <a href="{% url 'accounts:ownerLogOut' %}">Logout</a>
+    <a href="{% url 'products:accountsSection' %}">Accounts</a>
+    <a href="{% url 'products:morningEvening' %}">Product</a>
     <a href="{% url 'manpower:empAttendance' %}">Manpower</a>
-    <a href="">Home</a>
+       <a href="{% url 'products:home' %}">Home</a>
 
   </div>
 <div class="container">

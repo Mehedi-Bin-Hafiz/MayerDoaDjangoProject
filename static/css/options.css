@@ -42,12 +42,12 @@ body{
 
 .container form{
 display: flex;
-    width: 100%;
+    width: 90%;
 
 }
 
 .container form button{
-    font-size: 30px;
+    font-size: 25px;
 }
 .button-89{
   --b: 4px;   /* border thickness */
@@ -71,11 +71,11 @@ display: flex;
   -webkit-user-select: none;
   touch-action: manipulation;
     margin: 0 auto;
-    margin-top: 5%;
-    padding-top: 4%;
-    padding-bottom: 4%;
-    padding-left: 8%;
-    padding-right: 8%;
+    margin-top: 4%;
+    padding-top: 3%;
+    padding-bottom: 3%;
+    padding-left: 10%;
+    padding-right: 10%;
 
 }
 
@@ -89,6 +89,36 @@ display: flex;
   background: var(--color);
   color: #fff;
 }
+
+
+/* NAVBAR */
+  .topnav {
+    background-color: #04AA6D;
+    overflow: hidden;
+  }
+
+  /* Style the links inside the navigation bar */
+  .topnav a {
+    float: right;
+    color: #f2f2f2;
+    text-align: center;
+    padding: 10px 12px;
+    text-decoration: none;
+    font-size: 18px;
+    width: 10%;
+  }
+
+  /* Change the color of links on hover */
+  .topnav a:hover {
+    background-color: #ddd;
+    color:  #04AA6D;
+  }
+
+  /* Add a color to the active/current link */
+  .topnav a.active {
+    background-color: #04AA6D;
+    color: white;
+  }
 
 
 

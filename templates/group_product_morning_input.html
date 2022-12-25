@@ -18,27 +18,43 @@
        <a href="{% url 'products:home' %}">Home</a>
 
   </div>
-          {% if messages %}
-                <div class="alert">
-              {% for message in messages %}
-                  <p{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message | title }}</p>
-              {% endfor %}
-               </div>
-          {% endif %}
+
   <div class="container">
     <section class="main">
       <div class="main-top">
         <i class="fas fa-user-cog"></i>
       </div>
-          <div class="usersEmployee">
+      <div class="usersEmployee">
+         {% for group in product_groups %}
         <div class="profile_card">
           <img src="{% static 'images/product logo.png' %}">
              <p>{{ today_date }}</p>
-          <h2 style="font-size: 25px; padding: 5px">{{ group_name|title }}</h2>
+          <h2 style="font-size: 25px; padding: 5px">{{ group.name|title }}</h2>
+          <div class="per_profile">
+            <table>
+              <tr>
+                  <td><span> Total Products: &nbsp; {{ total_products }}</span></td>
+              </tr>
+                <tr>
+                    <td><br></td>
+                </tr>
+            </table>
+
+          </div>
         </div>
 
       </div>
+      <form action="{% url 'products:morningInputConf' pk=group.id %}" method="POST">
+        {% csrf_token %}
       <section class="attendance">
+           {% if messages %}
+                <div class="alert">
+              {% for message in messages %}
+                  <p{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</p>
+              {% endfor %}
+               </div>
+          {% endif %}
+
         <div class="attendance-list">
           <h1></h1>
           <table class="table">
@@ -46,44 +62,30 @@
               <tr>
                 <th>Number</th>
                 <th>Item</th>
-                <th>Product Out</th>
-                <th>Product Return</th>
-                <th>Price</th>
+                <th>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Product Out</th>
               </tr>
             </thead>
 
             <tbody>
-            {% for  product_obj, status_obj in  product_and_status %}
+            {% for  product_name in  product_names %}
                 <tr>
                   <td>{{ forloop.counter }}</td>
-                  <td>{{ product_obj.name|title }}</td>
-                  <td>{{ status_obj.product_out }}</td>
-                  <td>{{ status_obj.product_return }}</td>
-                  <td>{{ status_obj.final_price }}</td>
+                  <td>{{ product_name.name|title }}</td>
+                  <td><input type="text" id="{{product_name.id}}" name="productOut[]"  maxlength="100" size="10" ></td>
                 </tr>
             {% endfor %}
 
-             <tr>
-                  <td>Damage Amount</td>
-                  <td> --------></td>
-                  <td> --------></td>
-                  <td> --------></td>
-                  <td>-{{ damage_price }}</td>
-                </tr>
-
-             <tr style="font-size: 20px; font-weight: bold">
-                  <td>Total Money</td>
-                  <td> </td>
-                  <td> </td>
-                  <td> </td>
-                  <td>{{subtotal}}</td>
-                </tr>
             </tbody>
 
           </table>
 
         </div>
       </section>
+          <div style="text-align: center; padding-left: 5%">
+            <input id="btn" type="submit" value="Submit">
+          </div>
+      </form>
+      {% endfor %}
     </section>
 
   </div>
