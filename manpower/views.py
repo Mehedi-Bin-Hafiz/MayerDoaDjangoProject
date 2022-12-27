@@ -6,22 +6,27 @@ from django.db.models import Sum, Count
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 
+today_date = 0
+first_day = 0
 
-time_zones = pytz.all_timezones
-country_time_zone = pytz.timezone('Asia/Dhaka')
-country_time = datetime.now(country_time_zone)
-today_date = str(country_time).split(' ')[0]
-first_day = country_time.replace(day=1)
-first_day = str(first_day).split(' ')[0]
-
+def date_time_maker():
+    global today_date
+    global first_day
+    country_time_zone = pytz.timezone('Asia/Dhaka')
+    country_time = datetime.now(country_time_zone)
+    today_date = str(country_time).split(' ')[0]
+    first_day = country_time.replace(day=1)
+    first_day = str(first_day).split(' ')[0]
 
 @login_required
 def emp_attendance(request):
+    date_time_maker()
     emp_model = Employee.objects.all().order_by("-id")
     attend_model = Attendance.objects.all().order_by("-id")
     return render(request,'attendance.html',{"emp_model":emp_model,"today_date":today_date, "attend_model":attend_model})
 @login_required
 def emp_profile(request,pk=None):
+    date_time_maker()
     total_present = 0
     total_absent = 0
     salary_remain = 0
@@ -70,6 +75,7 @@ def emp_profile(request,pk=None):
 
 @login_required
 def confirm_attendance(request):
+    date_time_maker()
 
     present_id = request.POST.getlist('present[]')
     absent_id = request.POST.getlist('absent[]')
