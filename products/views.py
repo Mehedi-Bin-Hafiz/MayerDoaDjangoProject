@@ -23,14 +23,17 @@ def home(request):
     return render(request, 'options.html')
 @login_required
 def company_groups(request):
+    date_time_maker()
     product_groups = ProductGroup.objects.all()
     return render(request,'groups.html',{"product_groups":product_groups})
 @login_required
 def morning_evening_choice(request):
+    date_time_maker()
     product_groups = ProductGroup.objects.all()
     return render(request,'morning_eve_input.html',{"product_groups":product_groups})
 @login_required
 def company_morning_groups(request):
+    date_time_maker()
     product_groups = ProductGroup.objects.all()
     return render(request,'morning_group.html',{"product_groups":product_groups})
 @login_required
@@ -166,5 +169,6 @@ def monthly_sell(request):
 
 @login_required
 def accounts_section(request):
+    date_time_maker()
     product_groups = ProductGroup.objects.all()
     return render(request, 'accounts_section.html', {"product_groups": product_groups})
