@@ -101,14 +101,18 @@ def daily_input_view(request ):
     date_time_maker()
     search_date = request.POST.get('SearchDate')
     pk = request.POST.get('groupSelector')
+    damage_price = 0
     try:
         product_groups_name = ProductGroup.objects.filter(id=pk).only('name')[0]
         product_model = Products.objects.filter(product_group_id=pk).order_by('-id').reverse()
         product_status_model = ProductStatus.objects.filter(date = search_date, product_group_id=pk).order_by('-id')
         product_price = ProductStatus.objects.filter(date = search_date, product_group_id=pk).order_by('-id').aggregate(Sum('final_price'))
-        damage_price = DamageProduct.objects.filter(date = search_date, product_group_id=pk).order_by('-id').values('price')[0]
+        try:
+            damage_price = DamageProduct.objects.filter(date = search_date, product_group_id=pk).order_by('-id').values('price')[0]
+            damage_price = int(damage_price['price'])
+        except:
+            damage_price = 0
         product_and_status = zip(product_model,product_status_model)
-        damage_price= int(damage_price['price'])
         product_price = int(product_price['final_price__sum'])
         subtotal = product_price-damage_price
     except:
